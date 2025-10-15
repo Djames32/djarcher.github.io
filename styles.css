@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root{
   --backcolor: #0B1220;       
   --section-color: #0F172A; 
@@ -17,6 +21,19 @@ body {
     color: var(--text);
 }
 
+#container {
+    display: grid;
+    height: 100vh;
+    gap: .5rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+
+    grid-template-areas: 
+        "nav"
+        "main"
+        "footer";
+}
+
 .section {
     padding: 56px 0;
     border-top: 1px solid var(--border);
@@ -29,23 +46,24 @@ h1, h2, h3 {
 
 .site-header {
     width: 100%;
-    height: 60px;
+    height: auto;
     background-color: var(--section-color);
     border-bottom: 1px solid white;
+
+    grid-area: nav;
 }
 
 .navlinks {
-    width: 600px;
-    height: 60px;
-    float: right;
-    text-align: right;
-    padding-right: 20px;
+    display: flex;
+    gap: 8px;
+    justify-content: right;
+    align-items: center;
+    padding: 0 20px;
 }
 
 .nav_link {
     color: var(--secondary-color);
     text-decoration: none;
-    display: inline-block;
     padding: 20px;
     font-size: 16px;
 }
@@ -57,12 +75,14 @@ h1, h2, h3 {
 
 .intro-container {
     width: 1100px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 100px;
     margin: 0 auto;
-    display: flex;
+    
 }
 
 .intro-left {
-    width: 400px;
     padding: 20px;
     text-align: center;
 
@@ -86,11 +106,9 @@ h1, h2, h3 {
 }
 
 .intro-right {
-    width: 500px;
     padding: 20px;
     background-color: var(--section-color);
     border: 1px solid var(--border);
-    margin-left: auto;
     text-align: center;
 }
 
@@ -101,8 +119,13 @@ h1, h2, h3 {
 
 
 .projects {
-    display: flex;
-    justify-content: space-evenly;
+    width: 1100px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    justify-items: center;
 }
 
 .project-card {
@@ -110,9 +133,8 @@ h1, h2, h3 {
     padding: 20px;
     border-radius: 8px;
     border: 1px solid var(--border);
-    width: 330px;
-    margin-left: 15px;
-    margin-right: 15px;
+    width: 100%;
+    max-width: 330px;
     text-align: center;
 }
 
@@ -122,8 +144,6 @@ h1, h2, h3 {
     padding: 20px;
     border-radius: 8px;
     border:1px  solid var(--border);
-    margin-left: 40px;
-    margin-right: 40px;
     text-align: center;
 }
 
@@ -138,10 +158,84 @@ h1, h2, h3 {
     text-align: center;
 }
 
+.education-degree, .contact-form {
+    width: 1100px;
+    margin: 0 auto;
+    
+}
+
 .site-footer {
     text-align: center;
     padding: 20px 0;
     background: var(--section-color);
     border-top: 1px solid var(--border);
     color: var(--text-2);
+
+    grid-area: footer;
 }
+
+main {
+    grid-area: main;
+}
+
+#projects h2 {
+    width: 1100px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 500px) {
+    .navlinks {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;         
+        gap: 0;
+        padding: 0 8px;
+        height: auto;
+        width: 100%;
+    }
+
+    .nav_link {
+    flex: 1 1 0;  
+    min-width: 0;          
+    text-align: center;
+    padding: 10px 6px;     
+    font-size: 14px;
+  }
+
+    .intro-container {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .projects {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        justify-items: center;
+    }
+    .project-card {
+        width: 100%;
+        max-width: 330px;
+    }
+
+    .education-degree {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto;
+  }
+    
+      
+    .intro-container,
+    .projects,
+    #projects h2,
+    .education-degree,
+    .contact-form {
+        width: 100%;
+    }
+
+}
+
